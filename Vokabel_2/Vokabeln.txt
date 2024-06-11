@@ -1,0 +1,6 @@
+spielen|play
+kaufen|buy
+reden|speak
+Pferd|horse
+Blume|flower
+Affe|ape

@@ -15,7 +15,7 @@ MainWindow::~MainWindow()
 QStringList Restart_Vokabel;
 QStringList Vokabel;
 QStringList Nochmal;
-bool sprache_ändern = 0; // 0 = Deutsch, 1 = Englisch
+bool sprache = 0; // 0 = Deutsch, 1 = Englisch
 bool sprache_vok = 0;
 int vok_num = 0;
 bool fertig = 0;
@@ -24,7 +24,7 @@ void MainWindow::vokabel_print()
 {
     plainTextEdit->clear();
     if(fertig) plainTextEdit->appendPlainText("Fertig!!!");
-    else if(Vokabel.length() > 0) plainTextEdit->appendPlainText(Vokabel[vok_num].split("|")[sprache_vok]);
+    else if(Vokabel.length()) plainTextEdit->appendPlainText(Vokabel[vok_num].split("|")[sprache_vok]);
     else plainTextEdit->appendPlainText("Keine Vokabel");
 }
 
@@ -64,7 +64,7 @@ void MainWindow::on_drehen_btn_clicked()
 
 void MainWindow::on_richtig_btn_clicked()
 {
-    sprache_vok = sprache_ändern;
+    sprache_vok = sprache;
     vok_num += 1;
     if(vok_num >= Vokabel.length()){
         vok_num = 0;
@@ -88,8 +88,8 @@ void MainWindow::on_wiederholen_btn_clicked()
 
 void MainWindow::on_sprache_btn_clicked()
 {
-    sprache_ändern = !sprache_ändern;
-    if(!sprache_ändern)sprache_btn->setText("Deutsch");
+    sprache = !sprache;
+    if(!sprache)sprache_btn->setText("Deutsch");
     else sprache_btn->setText("Englisch");
 }
 
@@ -100,7 +100,6 @@ void MainWindow::on_reset_btn_clicked()
     Nochmal.clear();
     vok_num = 0;
     fertig = 0;
-    sprache_vok = sprache_ändern;
-    mischen();
+    sprache_vok = sprache;
     vokabel_print();
 }
